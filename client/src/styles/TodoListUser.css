@@ -1,0 +1,168 @@
+.todoListUser{
+    background-color:rgb(192, 255, 195);
+    text-align: center;
+}
+
+h1{
+    color: brown;
+    font-size: 30px;
+    padding-top: 10px;
+    text-transform: uppercase;
+}
+.btn-add{
+    width: 70px;
+    margin-left: 5px;
+    background-color: blue;
+    border: solid 1px gray;
+}
+.header_container{
+    position: relative;
+    font-size: 25px;
+}
+
+.h2{
+    color: red;
+    text-transform: uppercase;
+}
+.h3{
+    text-align: left;
+    margin-left: 400px;
+}
+
+.listItem{
+    display: flex;
+    margin-left: 400px;
+}
+.item{
+    padding: 0 10px;
+}
+.btn-cancel{
+    border: solid 1px #333;
+    background-color: red;
+    width: 80px;
+    margin-left: 20px;
+}
+
+/*Project css*/
+.project{
+    background-color: aquamarine;
+    margin: 0 auto;
+}
+
+.folder-commit{
+    padding-top: 10px;
+    margin-left: 200px;
+}
+
+.task,.addDeadline{
+    color:#000;
+    font-size: 20px;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.task-input-field{
+    min-width: 600px;
+    height: 30px;
+    border: solid 1px gray;
+    padding-left: 5px;
+    font-size: 16px;
+    color:rgb(29, 6, 6);
+}
+
+.addDeadline{
+    margin-top: 10px;
+}
+
+.deadline-input-field{
+    min-width: 200px;
+    border: solid 1px gray;
+    font-size: 16px;
+    color: rgb(29, 6, 6);
+}
+
+.btn-commit{
+    margin-top: 10px;
+    border: solid 1px gray;
+
+}
+
+.btn-commit:hover{
+    background-color: gray;
+}
+
+.main-table{
+  margin-left: 100px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-collapse: collapse;
+  height: 20px;
+}
+
+.main-table > thead > tr > th,
+.main-table > tbody > tr > td {
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.main-table > tbody > tr > td:nth-child(1){
+    width: 40px;
+     text-align: center
+}
+
+.main-table > tbody > tr > td:nth-child(2){
+   width: 700px;
+   text-align: center;
+}
+
+.main-table > tbody > tr > td:nth-child(3){
+    width: 150px;
+    text-align: center;
+}
+
+.main-table > tbody > tr > td:nth-child(4){
+    width: 100px;
+    text-align: center;
+}
+
+.main-table > tbody > tr > td:nth-child(5){
+    width: 100px;
+    text-align: center;
+}
+.btn-delete,.btn-edit{
+    width: 80px;
+    background-color: rgb(36, 36, 163);
+    height: 36px;
+    text-transform: uppercase;
+    font-size: 16px;
+    color: #000;
+}
+
+.btn-delete:hover,.btn-edit:hover{
+    background-color: gray;
+}
+.noListTask{
+    margin-top:20px ;
+    text-align: center;
+    font-size: 30px;
+    color: crimson;
+    font-weight: 500;
+}
+.btn-Reset{
+    width: 80px;
+    background-color: rgb(36, 36, 163);
+    font-size: 16px;
+    color: #000;
+    border: solid 1px grey;
+    margin-left: 10px;
+}
+
+.btn-Reset:hover,.btn-add:hover{
+    background-color: gray;
+}
+
+/*manager*/
+
+.project-manager{
+    background-color: aquamarine;
+}

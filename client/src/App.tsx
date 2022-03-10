@@ -1,8 +1,18 @@
+import RegisterForm from "components/Register_form";
+import LoginForm from "components/Login_form";
+import TodoListUser from "components/TodoList_user";
+import ProjectTask from "components/Project";
+import Manager from "components/TodoListAdmin"
+
 function App() {
   return (
     <div className="App">
       <header className="">
-        <h1 className="text-red-500 font-extrabold">Hello Beto</h1>
+        <RegisterForm/>
+        <LoginForm />
+        <TodoListUser/>
+        <ProjectTask/>
+        <Manager/>
       </header>
     </div>
   );

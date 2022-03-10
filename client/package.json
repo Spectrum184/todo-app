@@ -21,6 +21,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+    
   },
   "eslintConfig": {
     "extends": [
@@ -45,4 +46,5 @@
     "postcss": "^8.4.6",
     "tailwindcss": "^3.0.22"
   }
+  
 }

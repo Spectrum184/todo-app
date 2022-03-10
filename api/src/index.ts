@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import routes from "./routes"
 
 import { Request, Response } from 'express';
 
@@ -29,6 +30,8 @@ app.get('/api/', (req: Request, res: Response) => {
     message: 'Hello',
   });
 });
+
+app.use("/api", routes)
 
 app.listen(port, () => {
   console.log(`Express is listening on port ${port}`);
