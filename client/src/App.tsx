@@ -9,10 +9,10 @@ function App() {
     <div className="App">
       <header className="">
         <RegisterForm/>
-        <LoginForm />
+        {/* <LoginForm />
         <TodoListUser/>
         <ProjectTask/>
-        <Manager/>
+        <Manager/> */}
       </header>
     </div>
   );

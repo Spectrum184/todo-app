@@ -51,7 +51,7 @@ const catCtrl = {
     delete: async (req: Request, res: Response) =>{
         try {
             const  id  = req.params.id;
-
+            
             const cat = await catService.deleteCat(id);
 
             if (!cat) return res.status(400).json({ msg: 'Not Found!' });

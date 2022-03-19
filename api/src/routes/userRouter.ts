@@ -7,4 +7,12 @@ router.post("/user", UserController.createUser);
 
 router.post("/user/login", UserController.UserLogin);
 
+router.post("/user/logout", UserController.UserLogout);
+
+router.get("/user/:username", UserController.userGet);
+
+router.delete("/user/:id", UserController.userDelete);
+
+router.patch("/user/edit/:id", UserController.userUpdate);
+
 export default router;

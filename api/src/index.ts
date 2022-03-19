@@ -16,7 +16,7 @@ app.use(express.urlencoded());
 
 const URI = process.env.MONGO_URI || 'mongodb://mongo:27017/beto';
 
-mongoose.connect(URI, { autoIndex: false }, (err) => {
+mongoose.connect(URI, { autoIndex: true}, (err) => {
   if (err) throw err;
 
   console.log('Connected to mongo!');

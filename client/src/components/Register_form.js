@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
+import axios from 'axios'
 import '../styles/App.css'
 
 function RegisterForm() {
@@ -9,44 +10,54 @@ function RegisterForm() {
         firstName: '',
         lastName: '',
         email: '',
-        telephone: '',
-        key: null
+        telephoneNumber: '',
     }
 
     const [userInfo, setUserInfo] = useState(initialUserInfo);
     const [listUserInfo, setListUserInfo] = useState([]);
 
-    useEffect(() => {
-        const listUserInfo = JSON.parse(localStorage.getItem('listUserInfo'))
-        if (listUserInfo && listUserInfo.length > 0) {
-            setListUserInfo(listUserInfo);
-        }
+    // useEffect(() => {
+    //     const listUserInfo = JSON.parse(localStorage.getItem('listUserInfo'))
+    //     if (listUserInfo && listUserInfo.length > 0) {
+    //         setListUserInfo(listUserInfo);
+    //     }
 
-    }, [])
+    // }, [])
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setUserInfo({ ...userInfo, [name]: value })
     }
 
+    const handleBlur = () => {
+        var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+        if (userInfo.email) {
+            return regex.test(userInfo.email) ? userInfo.email : alert("truong nay phai la email")
+        }
+
+    }
+
     const handleSubmit = () => {
-        if (!userInfo.username || !userInfo.password || !userInfo.role || !userInfo.lastName || !userInfo.firstName || !userInfo.email || !userInfo.telephone) {
+        console.log(userInfo)
+        if (!userInfo.username || !userInfo.password || !userInfo.role || !userInfo.lastName || !userInfo.firstName || !userInfo.email || !userInfo.telephoneNumber) {
             alert("ban hay dien noi dung vao cac o input")
         }
         else {
-            const newListUserInfo = [...listUserInfo];
-            newListUserInfo.push(userInfo);
-            setListUserInfo(newListUserInfo);
-            console.log(newListUserInfo)
-            setUserInfo(initialUserInfo);
-            localStorage.setItem('listUserInfo', JSON.stringify(newListUserInfo))
+            axios.post("http://localhost:5000/api/user", { ...userInfo })
+                .then(resp => { console.log(resp.data) })
+                .catch(function (error) {
+                    
+                    console.log(error.response.data);
+                });
+                setUserInfo(initialUserInfo)
         }
     }
-    const handleSubmitReset = () => {
-        const newListUserInfo = [];
-        setListUserInfo(newListUserInfo);
-        localStorage.setItem('listUserInfo', JSON.stringify(newListUserInfo))
-    }
+    // const handleSubmitReset = () => {
+    //     const newListUserInfo = [];
+    //     setListUserInfo(newListUserInfo);
+    //     localStorage.setItem('listUserInfo', JSON.stringify(newListUserInfo))
+    // }
 
     return (
         <div>
@@ -83,12 +94,12 @@ function RegisterForm() {
                             <h3>Role</h3>
                             <select className='input-field'
                                 name='role'
-                                onChange={handleChange} 
+                                onChange={handleChange}
                                 value={userInfo.role}
                             >
                                 <option value="User">User</option>
                                 <option value="Admin">Admin</option>
-                                
+
                             </select>
                         </div>
 
@@ -122,6 +133,7 @@ function RegisterForm() {
                                 className="input-field"
                                 type="text"
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                                 name="email"
                                 placeholder='quocviettn@gmail.com'
                                 value={userInfo.email}
@@ -134,9 +146,9 @@ function RegisterForm() {
                                 className="input-field"
                                 type="text"
                                 onChange={handleChange}
-                                name="telephone"
+                                name="telephoneNumber"
                                 placeholder='telephone_Number'
-                                value={userInfo.telephone}
+                                value={userInfo.telephoneNumber}
                             />
                         </div>
                         <div className='button'>
@@ -150,11 +162,9 @@ function RegisterForm() {
                                 login
                             </button>
 
-
                             <button className="btn-cancel" >
                                 cancel
                             </button>
-
 
                         </div>
 
@@ -173,19 +183,19 @@ function RegisterForm() {
                                     <li>lastName:{item.lastName}</li>
                                     <li>fullName: {item.lastName} {item.firstName}</li>
                                     <li>email:{item.email}</li>
-                                    <li>telephone_Number:{item.telephone}</li>
+                                    <li>telephone_Number:{item.telephoneNumber}</li>
                                 </ul>
 
                             ))
                         )
 
                         }
-                        <div>
+                        {/* <div>
                             <button className="btn-cancel" onClick={handleSubmitReset} >
                                 reset
                             </button>
 
-                        </div>
+                        </div> */}
                     </div>
 
                 </div>

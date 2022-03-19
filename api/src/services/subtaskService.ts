@@ -46,7 +46,7 @@ const SubtaskService = {
 
     deleteSubtask:async (id: string ) => {
         try {
-            const subtask = Subtasks.findByIdAndDelete(id);
+            const subtask = await Subtasks.findByIdAndDelete(id);
 
             if(!subtask) return false
 

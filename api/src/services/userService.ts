@@ -23,14 +23,14 @@ const UserService = {
 
     updateUser: async (id: string, user: Partial<IUser> ) =>{
         try {
+            const hashedPassword = await hash(user.password ? user.password : "")
             const updateUser = await Users.findByIdAndUpdate(
-                id,
-                {
-                    ...user,
-                },
-                {new:true} 
+               id, {
+                     ...user,
+                password: hashedPassword
+               }
             )
-
+                console.log(updateUser)
             return updateUser
         } catch (error) {
             throw error;
@@ -53,11 +53,10 @@ const UserService = {
 
     deleteUser:async (id:string) => {
         try {
-            const user = Users.findByIdAndDelete(id);
+            const user = await Users.findByIdAndDelete(id).select(["username", "role", "email"]).exec()
 
-            if(!user) return false;
-
-            return true
+            if(!user) return undefined;
+            return user
         } catch (error) {
             throw error
         }

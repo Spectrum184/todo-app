@@ -33,9 +33,7 @@ const TaskServices = {
 
     getTask: async (id: string) => {
         try {
-            const task = await Tasks.findById({
-                id,
-            })
+            const task = await Tasks.findById(id);
 
             return task._doc;
         } catch (error) {
@@ -44,9 +42,9 @@ const TaskServices = {
 
     },
 
-    deleteTask:async (id:string) => {
+    deleteTask: async (id:string) => {
         try {
-            const task = Tasks.findByIdAndDelete(id)
+            const task = await Tasks.findByIdAndDelete(id)
 
             if(!task) return false;
 

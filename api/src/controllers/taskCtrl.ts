@@ -1,5 +1,6 @@
 import { Response, Request } from 'express';
 import { ITask } from '../interfaces/task';
+import { ISubTask } from '../interfaces/task';
 import validateTasks from '../libs/validateTask';
 import TaskServices from '../services/taskService';
 
@@ -7,6 +8,7 @@ const TaskController = {
     createTask:async (req:Request, res: Response) => {
         try {
             const taskData: ITask = req.body;
+            const subtaskData: ISubTask = req.body;
 
             const validateTask = validateTasks.validateCreate(taskData);
 
@@ -16,7 +18,10 @@ const TaskController = {
             const task = await TaskServices.createTask(taskData);
             return res.status(200).json({
                 validateTask,
-                task
+                task:{
+                    ...task,
+                    subtasks:subtaskData,
+                }
             })
         } catch (error) {
             console.error(error);

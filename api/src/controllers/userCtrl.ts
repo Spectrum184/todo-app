@@ -10,16 +10,22 @@ const UserController ={
     createUser: async (req: Request, res:Response)=>{
         try {
             const userData : IUser = req.body;
-
+            console.log(userData)
             const validateUser = validateUsers.validateCreate(userData);
 
             if (validateUser.error) return res.status(400).json(
                  validateUser.error.details[0]
             )
+           // const userCheck = await UserService.getUser(userData.username);
+            //if (userCheck) return res.status(400).json({
+          //      msg: "Username already exists"
+          //  })
             const user = await UserService.createUser(userData);
             return res.status(200).json({
-                validateUser,
-                user
+                user: {
+                    ...user._doc,
+                    password: undefined,
+                },
             })
         } catch (error) {
             console.error(error);
@@ -68,6 +74,18 @@ const UserController ={
         }
     },
 
+    UserLogout: async (req: Request, res: Response) => {
+        try {
+            res.clearCookie('accessToken');
+            return res.status(200).json({
+                msg: 'Logged Out!',
+            });
+        } catch (error) {
+            console.error(error);
+            return res.status(500).json({ error });
+        }
+    },
+
     userUpdate: async (req: Request, res: Response) => {
         try {
             const userData: Partial<IUser> = req.body;
@@ -79,8 +97,7 @@ const UserController ={
             )
             const user = await UserService.updateUser(req.params.id, userData);
             return res.status(200).json({
-                validateUser,
-                user
+                ...user
             })
 
         } catch (error) {
@@ -109,13 +126,17 @@ const UserController ={
 
     userGet: async (req: Request, res: Response) => {
         try {
-            const  username  = req.params.username;
+            const  {username}  = req.params;
 
             if (!username) return res.status(400).json({msg:"not found"})
             const userData = await UserService.getUser(username);
-            return res.status(200).json({
-                userData
-            })
+              return res.status(200).json({
+                userData: {
+                  ...userData,
+                  password: undefined,
+                },
+              });
+            
         } catch (error) {
 
             console.error(error)
