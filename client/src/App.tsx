@@ -1,20 +1,27 @@
-import RegisterForm from "components/Register_form";
-import LoginForm from "components/Login_form";
-import TodoListUser from "components/TodoList_user";
-import ProjectTask from "components/Project";
-import Manager from "components/TodoListAdmin"
+import "react-toastify/dist/ReactToastify.css";
+
+import { ToastContainer } from "react-toastify";
+import Register from "pages/Register";
+import Login from "pages/Login";
+import TodoListUser from "components/TodoListUser";
+import Project from "components/Project";
+import TodoListAdmin from "components/TodoListAdmin";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
-      <header className="">
-        <RegisterForm/>
-        {/* <LoginForm />
-        <TodoListUser/>
-        <ProjectTask/>
-        <Manager/> */}
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/register" element={<Register />}></Route>
+        <Route
+          path="/admin/todo-list-admin"
+          element={<TodoListAdmin />}
+        ></Route>
+      </Routes>
+      <ToastContainer />
+    </BrowserRouter>
   );
 }
 

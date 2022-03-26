@@ -18,11 +18,7 @@ const subtaskSchema = new mongoose.Schema({
         type: String,
         enum: Status,
         default: Status.NOT_STARTED
-    },
-    user: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "users"
-    }]
+    }
 }, {
     timestamps: true
 })

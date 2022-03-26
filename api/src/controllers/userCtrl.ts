@@ -10,16 +10,15 @@ const UserController ={
     createUser: async (req: Request, res:Response)=>{
         try {
             const userData : IUser = req.body;
-            console.log(userData)
             const validateUser = validateUsers.validateCreate(userData);
 
             if (validateUser.error) return res.status(400).json(
                  validateUser.error.details[0]
             )
-           // const userCheck = await UserService.getUser(userData.username);
-            //if (userCheck) return res.status(400).json({
-          //      msg: "Username already exists"
-          //  })
+           const userCheck = await UserService.getUser(userData.username);
+            if (userCheck) return res.status(400).json({
+               msg: "Username already exists"
+           })
             const user = await UserService.createUser(userData);
             return res.status(200).json({
                 user: {
@@ -128,8 +127,10 @@ const UserController ={
         try {
             const  {username}  = req.params;
 
-            if (!username) return res.status(400).json({msg:"not found"})
             const userData = await UserService.getUser(username);
+            console.log(userData)
+            if (!userData) return res.status(400).json({msg:"not found"})
+
               return res.status(200).json({
                 userData: {
                   ...userData,
@@ -143,6 +144,22 @@ const UserController ={
             return res.status(500).json(error)
         }
 
+    },
+
+    userGetAll:async (req: Request, res: Response) => {
+        try {
+            const  {role}  = req.params;
+
+            console.log(role)
+            if (!role) return res.status(400).json({msg:"not found"})
+            const userData = await UserService.getAllUser(role);
+              return res.status(200).json(userData);
+            
+        } catch (error) {
+
+            console.error(error)
+            return res.status(500).json(error)
+        }
     }
 }
 export default UserController

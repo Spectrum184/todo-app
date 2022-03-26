@@ -31,13 +31,7 @@ const UserSchema = new mongoose.Schema({
     telephoneNumber: {
         type: String,
         required: false,
-    },
-    tasks:[
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "tasks"
-        }
-    ]
+    }
 });
 UserSchema.virtual("fullName")
     .get(function (this: { firstName: string, lastName: string }) {
